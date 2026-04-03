@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: vision_platform
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ../scripts/setup_db.sql:/docker-entrypoint-initdb.d/setup.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Worker service (build from source)
+  worker:
+    build:
+      context: ..
+      dockerfile: deployments/Dockerfile
+    command: >
+      /app/build/vp_scheduler
+        -d "host=postgres dbname=vision_platform user=postgres password=postgres"
+        -r redis
+        -m /app/models/yolov8n.onnx
+        -l /app/models/coco.txt
+        -o /app/output
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ../models:/app/models
+      - ../output:/app/output
+
+volumes:
+  pgdata:
