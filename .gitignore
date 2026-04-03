@@ -1,0 +1,29 @@
+# Build
+build/
+*.o
+*.a
+
+# Output
+output/
+reports/
+
+# Models (large binaries)
+models/*.onnx
+models/*.engine
+models/*.bin
+!models/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+compile_commands.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env
