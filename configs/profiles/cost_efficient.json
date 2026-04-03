@@ -1,0 +1,17 @@
+{
+  "name": "Cost Efficient",
+  "input_width": 320,
+  "input_height": 320,
+  "sampling_policy": "interval",
+  "sampling_interval": 5,
+  "confidence_threshold": 0.40,
+  "iou_threshold": 0.50,
+  "batch_size": 1,
+  "preferred_engine": "onnx",
+  "tracking_enabled": false,
+  "track_max_age": 0,
+  "max_retries": 1,
+  "timeout_ms": 60000,
+  "max_memory_mb": 256,
+  "description": "Minimize compute cost. Aggressive sampling, smaller resolution, stricter thresholds."
+}

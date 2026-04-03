@@ -1,0 +1,17 @@
+{
+  "name": "Low Latency",
+  "input_width": 416,
+  "input_height": 416,
+  "sampling_policy": "interval",
+  "sampling_interval": 3,
+  "confidence_threshold": 0.30,
+  "iou_threshold": 0.50,
+  "batch_size": 1,
+  "preferred_engine": "onnx",
+  "tracking_enabled": true,
+  "track_max_age": 20,
+  "max_retries": 2,
+  "timeout_ms": 30000,
+  "max_memory_mb": 512,
+  "description": "Minimize response time. Smaller model input, conservative sampling, batch 1."
+}

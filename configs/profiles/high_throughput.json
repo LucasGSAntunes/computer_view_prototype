@@ -1,0 +1,17 @@
+{
+  "name": "High Throughput",
+  "input_width": 640,
+  "input_height": 640,
+  "sampling_policy": "all",
+  "sampling_interval": 1,
+  "confidence_threshold": 0.25,
+  "iou_threshold": 0.45,
+  "batch_size": 4,
+  "preferred_engine": "onnx",
+  "tracking_enabled": true,
+  "track_max_age": 30,
+  "max_retries": 3,
+  "timeout_ms": 120000,
+  "max_memory_mb": 2048,
+  "description": "Maximize processed volume per unit time. Larger batches, full sampling."
+}
