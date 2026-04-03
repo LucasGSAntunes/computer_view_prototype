@@ -11,6 +11,7 @@ reports/
 models/*.onnx
 models/*.engine
 models/*.bin
+models/*.pt
 !models/.gitkeep
 
 # IDE
